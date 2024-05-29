@@ -1,0 +1,9 @@
+- name: Add user, install http and php
+  hosts: test
+  gather_facts: yes
+  become: 'yes'
+
+  roles:
+    - users
+    - http
+    - php

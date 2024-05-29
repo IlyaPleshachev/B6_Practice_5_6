@@ -1,0 +1,19 @@
+---
+# tasks file for users
+- name: Add group http-data
+  group:
+    name: http-data
+    state: present
+
+- name: Add user
+  user:
+    force: true
+    name: "{{name_user}}"
+    groups: http-data
+    create_home: true
+    
+- name: Insert authorized key
+  ansible.posix.authorized_key:
+    user: "{{name_user}}"
+    state: present
+    key: '{{ lookup(''file'', ''/Users/ipleshachev .ssh/ssh_key.pub'') }}'
